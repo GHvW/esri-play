@@ -20,7 +20,10 @@ require([
   "esri/views/MapView",
   "esri/layers/VectorTileLayer",
   "esri/Basemap",
-], function (Map, MapView, Basemap, VectorTileLayer) {
+  "esri/widgets/Sketch",
+  "esri/Graphic",
+  "esri/layers/GraphicsLayer"
+], function (Map, MapView, Sketch, Graphic, GraphicsLayer) {
 
   // const awesomeBasemap = new Basemap({
   //   baselayers: [
@@ -29,6 +32,8 @@ require([
   //     })
   //   ]
   // });
+  // const graphic1 = new Graphic();
+  const graphicsLayer = new GraphicsLayer();
 
   const map = new Map({
     basemap: "streets-navigation-vector"
@@ -38,7 +43,14 @@ require([
     container: "app",
     map: map,
     center: [-96.3365, 30.6185],
-    zoom: 11
+    zoom: 11,
+    // layers: [graphicsLayer]
   });
 
+  const sketch = new Sketch({
+    view: view,
+    layer: graphicsLayer
+  })
+
+  view.ui.add(sketch, "top-right");
 });
